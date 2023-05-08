@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+  db:
+    image: mysql:8.0
+    container_name: student-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: studentSystem
+      MYSQL_USER: rootUsername!
+      MYSQL_PASSWORD: rootPassword!
+      MYSQL_ROOT_PASSWORD: rootPassword!
+    ports:
+      - "3336:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+  app:
+    build:
+      context: .
+    container_name: nestjs-app
+    restart: always
+    ports:
+      - "3001:3000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: 3306
+      DATABASE_USER: rootUsername!
+      DATABASE_PASSWORD: rootPassword!
+      DATABASE_NAME: studentSystem
+volumes:
+  db_data:
