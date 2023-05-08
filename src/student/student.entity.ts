@@ -18,6 +18,6 @@ export class Student {
   @Column()
   dateOfBirth: Date;
 
-  @OneToMany(() => Result, (result) => result.student)
+  @OneToMany(() => Result, (result) => result.student, { onDelete: 'CASCADE' })
   results: Result[];
 }

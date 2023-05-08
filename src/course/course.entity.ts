@@ -9,6 +9,6 @@ export class Course {
   @Column()
   courseName: string;
 
-  @OneToMany(() => Result, (result) => result.student)
+  @OneToMany(() => Result, (result) => result.student, { onDelete: 'CASCADE' })
   results: Result[];
 }
